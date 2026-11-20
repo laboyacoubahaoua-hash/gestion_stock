@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 export default function RegisterPage() {
   const router = useRouter();
   const { user, isLoading, signUp } = useAuth();
+   const [nom, setnom] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -51,6 +52,16 @@ export default function RegisterPage() {
           <p style={{ color: "#666", fontSize: 14 }}>Créez votre compte pour gérer votre stock</p>
         </div>
 
+<div style={{ marginTop: 20 }}>
+          <label>Nom complet</label>
+          <input
+            type="texte"
+            value={nom}
+            onChange={(e) => setnom(e.target.value)}
+            placeholder="Votre nom"
+            style={{ width: "100%", padding: 12, borderRadius: 8, border: "1px solid #ddd", marginTop: 4, background: "#eff6ff" }}
+          />
+        </div>
         <div style={{ marginTop: 20 }}>
           <label>Email</label>
           <input
