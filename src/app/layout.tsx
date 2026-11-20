@@ -10,7 +10,7 @@ const geistSans = {
   variable: ""};
 
 const geistMono ={
-  variable: ""};
+  variable: ""}; 
 
 export const metadata: Metadata = {
   title: "Gestion de Stock",

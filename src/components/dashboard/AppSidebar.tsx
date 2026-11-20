@@ -25,6 +25,7 @@ const menuItems = [
   { title: 'Fournisseurs', href: '/dashboard/suppliers', icon: Users },
   { title: 'Categories', href: '/dashboard/categories', icon: Tags },
   { title: 'Alertes', href: '/dashboard/alerts', icon: AlertTriangle },
+   { title: 'Entrepots', href: '/entrepots', icon: Boxes },
 ];
 
 export function AppSidebar() {

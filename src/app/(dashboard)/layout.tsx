@@ -43,6 +43,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <Link href="/suppliers">Fournisseurs</Link>
         <Link href="/movements">Mouvements</Link>
         <Link href="/utilisateurs">Utilisateurs</Link>
+        <Link href="/entrepots">Entrepôts</Link>
         <button
           type="button"
           onClick={logout}
