@@ -31,7 +31,7 @@ export default function RegisterPage() {
     }
 
     setSubmitting(true);
-    const { error: signUpError } = await signUp(email.trim(), password);
+    const { error: signUpError } = await signUp(email.trim(), password,nom);
     setSubmitting(false);
 
     if (signUpError) {

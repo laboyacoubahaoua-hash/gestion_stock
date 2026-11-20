@@ -7,7 +7,7 @@ type AuthContextType = {
   isLoading: boolean; 
   isManager: boolean; 
   signIn: (email: string, password: string) => Promise<{ error: any }>; 
-  signUp: (email: string, password: string) => Promise<{ error: any }>; 
+  signUp: (email: string, password: string,nom?: string) => Promise<{ error: any }>; 
   signOut: () => Promise<void>; 
   signInWithGoogle: () => Promise<{ error: any }>; 
   resetPassword: (email: string) => Promise<{ error: any }>; 
@@ -38,12 +38,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: null }; 
   }; 
  
-  const signIn = async (email: string, password: string) => { 
-    return makeUser(email); 
-  }; 
-  const signUp = async (email: string, password: string) => { 
-    return makeUser(email); 
-  }; 
+  const signIn = async (email: string, password: string,nom?:string) => { 
+const users = JSON.parse(localStorage.getItem("mes_utilisateurs") || "[]"); 
+const found = users.find((u: any) => u.email === email && u.password === password); 
+if (!found) return { error: { message: "Email ou mot de passe incorrect" } }; 
+return makeUser(email); 
+}; 
+const signUp = async (email: string, password: string,nom?: string) => { 
+const users = JSON.parse(localStorage.getItem("mes_utilisateur") || "[]"); 
+if (users.find((u: any) => u.email === email)) { 
+return { error: { message: "Ce compte existe déjà" } }; 
+} 
+users.push({ email, password , nom:nom ||email}); 
+localStorage.setItem("mes_utilisateurs", JSON.stringify(users)); 
+return makeUser(email); 
+};
   const signOut = async () => { 
     localStorage.removeItem('offline_user'); 
     setUser(null); 
@@ -56,7 +65,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: null }; 
   }; 
  
-  return ( 
+  return (  
     <AuthContext.Provider value={{ user, session, isLoading, isManager: true, signIn, signUp, 
 signOut, signInWithGoogle, resetPassword }}> 
       {children} 
